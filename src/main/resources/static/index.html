@@ -2,9 +2,158 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>First Spring</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo in Spring</title>
+    <style>
+        :root {
+            --white: #fff;
+            --royal-blue: #408EC6;
+            --midnight-blue: #1E2761;
+            --violet: #C71585;
+            --burgundy-red: #7A2048;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--midnight-blue);
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--white);
+            margin: 20px 0 40px 0;
+        }
+
+        h2 {
+            color: var(--royal-blue);
+            text-align: center;
+            position:relative;
+            top:5px;
+        }
+
+        .todo-list {
+            background-color: var(--white);
+            width: 400px;
+            height: 550px;
+            border: 5px solid var(--burgundy-red);
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .todo-list-input {
+            background-color: var(--white);
+            width: 360px;
+            height: 120px;
+            border: 5px solid var(--burgundy-red);
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .todo-list-items{
+            background-color: var(--white);
+            width: 360px;
+            height: 350px;
+            border: 5px solid var(--burgundy-red);
+            border-radius: 8px;
+            padding: 15px;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .todo-list-single-item{
+            position: relative;
+            top:10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+
+        }
+
+        .btn {
+            cursor: pointer;
+            width: 100px;
+            margin: 10px;
+            color: white;
+            background-color: var(--burgundy-red);
+            background-image: linear-gradient(#C71585, #7A2048);
+            border-color: var(--burgundy-red);
+            border-width: 3px;
+            align-self: center;
+            justify-self: center;
+        }
+
+        .btn:hover {
+            background-image: linear-gradient(#7A2048, #C71585);
+            color: var(--royal-blue);
+        }
+
+        .large-btn {
+            width: 80%;
+            font-size: 1.2rem;
+            align-self: center;
+            justify-self: center;
+        }
+
+        .header-content{
+             position:relative;
+             top:-10px;
+        }
+
+        .delete-btn{
+            position: absolute;
+            right: 0px;
+        }
+
+        p{
+            position: absolute;
+            left: 0px;
+            font-weight: bold;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Hello world!</h1>
+    <main>
+        <h1>Todo List</h1>
+        <div class="todo-list" >
+            <div action="add" method="post" class="todo-list-input">
+                <h2>Add a new task</h2>
+                <input id="todo-list-input" placeholder="Enter new task....." />
+                <button id="add-task" class="btn large-btn">Add Task</button>
+            </div>
+            <div class="todo-list-items">
+                <h2 class="header-content">Todo list content</h2>
+                <div class="todo-list-single-item">
+                <p>Go to the gym</p>
+                <button class="btn delete-btn">Delete</button>
+                </div>
+            </div>
+            <button class="btn large-btn">Reset List</button>
+        </div>
+    </main>
 </body>
 </html>
