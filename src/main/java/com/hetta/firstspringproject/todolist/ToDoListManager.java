@@ -12,16 +12,16 @@ public class ToDoListManager {
         this.list = new ArrayList<>();
     }
 
-    public void add(String s){
-        list.add(s);
+    public void add(String task){
+        list.add(task.replaceAll("\"", ""));
     }
 
     public void reset(){
         list = new ArrayList<>();
     }
 
-    public void delete(int i){
-        list.remove(i);
+    public void delete(int index){
+        list.remove(index);
     }
 
     public ArrayList<String> getList() {

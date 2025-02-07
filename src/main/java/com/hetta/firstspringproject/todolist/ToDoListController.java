@@ -1,42 +1,43 @@
 package com.hetta.firstspringproject.todolist;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class ToDoListController {
+    @Autowired
     private ToDoListManager toDoListManager;
+
 
     public ToDoListController(ToDoListManager toDoListManager) {
         this.toDoListManager = toDoListManager;
     }
 
-    @GetMapping("/get")
-    public List<String> get(){
+    @GetMapping("/list")
+    public List<String> getTasks(){
         return toDoListManager.getList();
     }
 
-    @GetMapping("/add")
-    public ResponseEntity<Boolean> add(@RequestParam String s){
-        toDoListManager.add(s);
-        return new ResponseEntity<>(HttpStatusCode.valueOf(200));
+    @PostMapping("/add")
+    public List<String> addTask(@RequestBody String task) {
+        toDoListManager.add(task);
+        return toDoListManager.getList();
     }
 
-    @GetMapping("/reset")
-    public ResponseEntity<Boolean> reset(){
+    @PostMapping("/reset")
+    public List<String> resetList() {
         toDoListManager.reset();
-        return new ResponseEntity<>(HttpStatusCode.valueOf(200));
+        return toDoListManager.getList();
     }
 
-    @GetMapping("/delete")
-    public ResponseEntity<Boolean> delete(@RequestParam int index){
+    @DeleteMapping("/delete/{index}")
+    public List<String> deleteTask(@PathVariable int index) {
         toDoListManager.delete(index);
-        return new ResponseEntity<>(HttpStatusCode.valueOf(200));
+        return toDoListManager.getList();
     }
 
 
