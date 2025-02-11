@@ -1,8 +1,7 @@
 package com.hetta.firstspringproject.todolist;
 
+import com.hetta.firstspringproject.entities.ToDoListTaskEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,24 +17,24 @@ public class ToDoListController {
     }
 
     @GetMapping("/list")
-    public List<String> getTasks(){
+    public List<ToDoListTaskEntity> getTasks(){
         return toDoListManager.getList();
     }
 
     @PostMapping("/add")
-    public List<String> addTask(@RequestBody String task) {
+    public List<ToDoListTaskEntity> addTask(@RequestBody String task) {
         toDoListManager.add(task);
         return toDoListManager.getList();
     }
 
     @PostMapping("/reset")
-    public List<String> resetList() {
+    public List<ToDoListTaskEntity> resetList() {
         toDoListManager.reset();
         return toDoListManager.getList();
     }
 
     @DeleteMapping("/delete/{index}")
-    public List<String> deleteTask(@PathVariable int index) {
+    public List<ToDoListTaskEntity> deleteTask(@PathVariable int index) {
         toDoListManager.delete(index);
         return toDoListManager.getList();
     }

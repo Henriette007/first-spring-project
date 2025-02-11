@@ -11,9 +11,9 @@ function showList(){
         .then(list => {
             list.forEach(task =>{
                 newInnerHtml += `
-                    <div class="todo-list-single-item" style="width: 350px;">
+                    <div class="todo-list-single-item" style="width: 350px;" value=${task.id}>
                         <input type="checkbox" id="task-checkbox" class="task-checkbox">
-                        <p>${task}</p>
+                        <p>${task.task}</p>
                         <button id="delete-button" class="btn delete-btn">Delete</button>
                     </div>`;
                 console.log('HTML updated');
@@ -50,8 +50,10 @@ addTaskBtn.addEventListener('click', addTask);
 
 document.addEventListener('click', function(event) {
     if (event.target && event.target.classList.contains('delete-btn')) {
-        let taskIndex = Array.from(event.target.closest('.todo-list-items').children).indexOf(event.target.closest('.todo-list-single-item'));
-        fetch(`/delete/${taskIndex}`, {
+        let array = Array.from(event.target.closest('.todo-list-items').children);
+        let taskIndex = array.indexOf(event.target.closest('.todo-list-single-item'));
+        let id = array[taskIndex].attributes.getNamedItem('value').value;
+        fetch(`/delete/${id}`, {
             method: 'DELETE'
         }).then(response => {
             console.log('Task was deleted.');
@@ -68,3 +70,4 @@ resetBtn.addEventListener('click', function () {
         showList();
     });
 });
+
